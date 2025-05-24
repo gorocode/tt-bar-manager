@@ -3,7 +3,7 @@
 <div align="center">
   <p>
     <a href="https://github.com/gorocode/tt-react">Frontend Repository</a> •
-    <a href="https://github.com/gorocode/tt-spring">Backend Repository</a> •
+    <a href="https://github.com/gorocode/tt-spring">Backend Repository</a>
   </p>
 </div>
 
