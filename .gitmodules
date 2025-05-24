@@ -1,0 +1,6 @@
+[submodule "tt-spring"]
+	path = tt-spring
+	url = https://github.com/gorocode/tt-spring.git
+[submodule "tt-react"]
+	path = tt-react
+	url = https://github.com/gorocode/tt-react.git

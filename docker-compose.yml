@@ -1,0 +1,72 @@
+version: "3.8"
+
+services:
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    restart: always
+    environment:
+      POSTGRES_DB: tabletalk
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: tableuser
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - backend-network
+
+  table-talk-backend:
+    build: ./tt-spring
+    container_name: table-talk-backend
+    depends_on:
+      - postgres-db
+    ports:
+      - "8080:8080"
+    environment:
+      # Frontend URL for CORS configuration
+      FRONTEND_URL: http://localhost:5173
+      # Database connection
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres-db:5432/tabletalk
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: tableuser
+      # JPA configuration
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_SHOW_SQL: "false"
+      # JWT configuration
+      JWT_SECRET: yourStrongSecretKeyHere
+      JWT_EXPIRATION_MS: "86400000"
+    networks:
+      - backend-network
+
+  table-talk-frontend:
+    build: 
+      context: ./tt-react
+    container_name: table-talk-frontend
+    ports:
+      - "5173:5173"
+    environment:
+      # API connection URLs
+      VITE_API_URL: http://localhost:8080
+      VITE_WS_URL: ws://localhost:8080/ws
+      # Frontend URL for callbacks and redirects
+      VITE_FRONT_URL: http://localhost:5173
+      # External services - replace with your own values
+      VITE_PAYPAL_ID: your-paypal-client-id
+      VITE_CLOUDINARY_NAME: your-cloudinary-name
+      VITE_CLOUDINARY_PRESENT: your-cloudinary-upload-preset
+      # QR Code
+      VITE_QR_SALT: tt-bar-manager
+    networks:
+      - frontend-network
+    depends_on:
+      - table-talk-backend
+
+networks:
+  backend-network:
+    driver: bridge
+  frontend-network:
+    driver: bridge
+
+volumes:
+  postgres-data:
