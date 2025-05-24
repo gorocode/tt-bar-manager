@@ -2,9 +2,8 @@
 
 <div align="center">
   <p>
-    <a href="./tt-react/README.md">Frontend Documentation</a> •
-    <a href="./tt-spring/README.md">Backend Documentation</a> •
-    <a href="./API.md">API Documentation</a>
+    <a href="https://github.com/gorocode/tt-react">Frontend Repository</a> •
+    <a href="https://github.com/gorocode/tt-spring">Backend Repository</a> •
   </p>
 </div>
 
@@ -17,7 +16,7 @@
 </div>
 
 <div align="center">
-  <h3><a href="https://tt.gorocode.dev" target="_blank">🔗 Live Demo</a></h3>
+  <h3><a href="https://tt.gorocode.dev/manager" target="_blank">🔗 Live Demo</a></h3>
   <p>Demo credentials (all with password <code>Password1234$</code>):</p>
   <table>
     <tr>
